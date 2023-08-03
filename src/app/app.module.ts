@@ -12,7 +12,7 @@ import { SortPipe } from './Pipes/sort.pipe';
     AppComponent,
     CreditCardComponent,
     CreditCardFormatPipe,
-    SortPipe
+    SortPipe,
   ],
   imports: [
     BrowserModule,
