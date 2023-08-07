@@ -9,9 +9,9 @@ export class CreditCardFormatPipe implements PipeTransform {
   transform(value: string) {
     if(value && value.length == 16){
       for(let i=0; i<16; i+=4){
-        this.formatedCreditCard += value.slice(i, i+4) + "...."
+        this.formatedCreditCard += value.slice(i, i+4) + "-"
       }
-      this.formatedCreditCard = this.formatedCreditCard.slice(0, this.formatedCreditCard.length -4)
+      this.formatedCreditCard = this.formatedCreditCard.slice(0, this.formatedCreditCard.length -1)
       return this.formatedCreditCard
     }
     else{

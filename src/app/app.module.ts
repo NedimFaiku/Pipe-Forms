@@ -6,17 +6,24 @@ import { AppComponent } from './app.component';
 import { CreditCardComponent } from './Credit-card-formatter/credit-card/credit-card.component';
 import { CreditCardFormatPipe } from './Pipes/credit-card-format.pipe';
 import { SortPipe } from './Pipes/sort.pipe';
-
+import { FormsComponent } from './forms/forms.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import { UserstableComponent } from './userstable/userstable.component';
+import { NavbarComponent } from './navbar/navbar.component'
 @NgModule({
   declarations: [
     AppComponent,
     CreditCardComponent,
     CreditCardFormatPipe,
     SortPipe,
+    FormsComponent,
+    UserstableComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
