@@ -4,7 +4,7 @@
     <h2 id="reistration">Registration Form</h2>
     <form action="" [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
       <div formGroupName="personalDetails">
-        <label for="fname">First Name</label>
+        <!-- <label for="fname">First Name</label>
         <input
           type="text"
           id="fname"
@@ -18,7 +18,7 @@
           id="lname"
           placeholder="Your last name.."
           formControlName="lastname"
-        />
+        /> -->
 
         <label for="username">Username</label>
         <input
@@ -27,6 +27,21 @@
           placeholder="Your username.."
           formControlName="username"
         />
+        <div>
+          <span
+            style="color: red"
+            *ngIf="reactiveForm.hasError('usernameNotAvailable')"
+          >
+            Username is not avaliable!
+          </span>
+            <span
+              style="color: red"
+              *ngIf="reactiveForm.get('personalDetails.username')?.invalid &&
+              reactiveForm.get('personalDetails.username')?.touched"
+            >
+              Username is required!
+            </span>
+        </div>
 
         <label for="email">Email</label>
         <input
@@ -39,12 +54,21 @@
           <span
             style="color: red"
             *ngIf="
-              !reactiveForm.get('personalDetails.value.email')?.valid &&
-              reactiveForm.get('personalDetails.value.email')?.touched
+              reactiveForm.get('personalDetails.email')?.invalid &&
+              reactiveForm.get('personalDetails.email')?.touched
             "
-            >The email you entered is not a valid email.</span
+            >The email you entered is not a valid email!</span
+          >
+          <span
+            style="color: red"
+            *ngIf="
+              reactiveForm.hasError('emailNotAvailable')
+            "
+            >The email you entered is not avaliable!</span
           >
         </div>
+
+
         <label for="password">Password</label>
         <input
           type="password"
@@ -52,10 +76,54 @@
           placeholder="Your password.."
           formControlName="password"
         />
+        <div>
+          <span
+            style="color: red"
+            *ngIf="reactiveForm.get('personalDetails.password')?.invalid &&
+            reactiveForm.get('personalDetails.password')?.touched"
+          >
+            Your password is too short try using longer one!
+          </span>
+        </div>
+
+
+        <label for="password">Confirm password</label>
+        <input
+          type="password"
+          id="passwordConfirm"
+          placeholder="Confirm your password.."
+          formControlName="passwordConfirm"
+        />
+        <div>
+          <span
+            style="color: red"
+            *ngIf="reactiveForm.get('personalDetails.passwordConfirm')?.touched && reactiveForm.hasError('passwordNotMatching')"
+          >
+            Your password does not match!
+          </span>
+        </div>
+
+
+        <label for="creditCard">Credit Card info</label>
+        <input
+          type="text"
+          id="creditCard"
+          placeholder="Your credit Card info.."
+          formControlName="creditCard"
+        />
+        <div>
+          <span
+            style="color: red"
+            *ngIf="reactiveForm.get('personalDetails.creditCard')?.invalid &&
+            reactiveForm.get('personalDetails.creditCard')?.touched"
+          >
+            Your credit card number must have 16 characters!
+          </span>
+        </div>
       </div>
 
-      <label for="job">Job Position:</label>
 
+      <label for="job">Job Position:</label>
       <input
         type="radio"
         id="full"
@@ -63,7 +131,6 @@
         formControlName="jobPosition"
       />
       <label for="full">Full Stack</label>
-
       <input
         type="radio"
         id="front"
@@ -71,7 +138,6 @@
         formControlName="jobPosition"
       />
       <label for="front">Front End</label>
-
       <input
         type="radio"
         id="back"
@@ -79,8 +145,12 @@
         formControlName="jobPosition"
       />
       <label for="back">Back end</label>
-
-      <input type="submit" value="Submit" id="btn" [disabled]="reactiveForm.invalid"/>
+      <input
+        type="submit"
+        value="Submit"
+        id="btn"
+        [disabled]="reactiveForm.invalid"
+      />
     </form>
   </div>
 </div>
