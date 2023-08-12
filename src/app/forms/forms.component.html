@@ -1,0 +1,86 @@
+<div class="container">
+  <div class="form">
+    <p class="error">{{ error }}</p>
+    <h2 id="reistration">Registration Form</h2>
+    <form action="" [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+      <div formGroupName="personalDetails">
+        <label for="fname">First Name</label>
+        <input
+          type="text"
+          id="fname"
+          placeholder="Your name.."
+          formControlName="firstname"
+        />
+
+        <label for="lname">Last Name</label>
+        <input
+          type="text"
+          id="lname"
+          placeholder="Your last name.."
+          formControlName="lastname"
+        />
+
+        <label for="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          placeholder="Your username.."
+          formControlName="username"
+        />
+
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          placeholder="Your email.."
+          formControlName="email"
+        />
+        <div>
+          <span
+            style="color: red"
+            *ngIf="
+              !reactiveForm.get('personalDetails.value.email')?.valid &&
+              reactiveForm.get('personalDetails.value.email')?.touched
+            "
+            >The email you entered is not a valid email.</span
+          >
+        </div>
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          placeholder="Your password.."
+          formControlName="password"
+        />
+      </div>
+
+      <label for="job">Job Position:</label>
+
+      <input
+        type="radio"
+        id="full"
+        value="full"
+        formControlName="jobPosition"
+      />
+      <label for="full">Full Stack</label>
+
+      <input
+        type="radio"
+        id="front"
+        value="front"
+        formControlName="jobPosition"
+      />
+      <label for="front">Front End</label>
+
+      <input
+        type="radio"
+        id="back"
+        value="back"
+        formControlName="jobPosition"
+      />
+      <label for="back">Back end</label>
+
+      <input type="submit" value="Submit" id="btn" [disabled]="reactiveForm.invalid"/>
+    </form>
+  </div>
+</div>
