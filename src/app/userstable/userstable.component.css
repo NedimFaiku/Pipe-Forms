@@ -1,0 +1,76 @@
+
+.table-snapshot {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-snapshot td {
+    padding: 13px;
+    min-width: 125px;
+}
+
+.table-snapshot th {
+    padding: 15px 15px 40px;
+    font-weight: 500;
+    min-width: 120px;
+}
+
+.table-snapshot th span {
+    border-bottom: .5px dashed #90C9F9;
+    padding: 2px;
+}
+
+.table-snapshot th:nth-child(1){
+    min-width: 180px;
+}
+
+.table-snapshot td:nth-child(1) {
+    text-transform: uppercase;
+    text-align: left;
+    font-size: 12px;
+    min-width: 180px;
+}
+
+.table-snapshot td,
+.table-snapshot th {
+    border: 1px solid #CFD8DC;
+    border-left: none;
+    text-align: center;
+}
+
+
+
+.details-main {
+    font-size: 14px;
+}
+
+.details-active {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.details-active,
+.details-main:hover {
+    background: #E3F2FD !important;
+    cursor: pointer;
+}
+
+.details-active:first-child {
+    color: #2196f3;
+}
+
+.details-properties span {
+    width: 50px;
+    text-align: right;
+    display: inline-block;
+    color: green;
+}
+
+.deleteUser{
+    border: none;
+    background-color: rgb(179, 27, 27);
+    color: white;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 8px;
+}

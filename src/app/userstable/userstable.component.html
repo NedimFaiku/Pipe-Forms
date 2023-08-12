@@ -1,1 +1,59 @@
-<p>userstable works!</p>
+<h1>Front End</h1>
+<table class="table-snapshot">
+    <tr>
+      <th><span>Username</span></th>
+      <th><span>Email</span></th>
+      <th><span>Credit Card</span></th>
+      <th><span>Job Position</span></th>
+      <th><span></span></th>
+    </tr>
+    <ng-container *ngFor="let user of usersData | sort:'asc'">
+        <tr class="details-main" *ngIf="user.jobposition === 'front'">
+          <td class="details">{{user.username}}</td>
+          <td class="details">{{user.email}}</td>
+          <td class="details-properties">{{user.creditCard | creditCardFormat}}</td>
+          <td class="details-properties">{{user.jobposition}}</td>
+          <td><button class="deleteUser" (click)="deleteUser(user.id)">Delete</button></td>
+        </tr>
+    </ng-container>
+  </table>
+
+  <h1>Back End</h1>
+  <table class="table-snapshot">
+    <tr>
+      <th><span>Username</span></th>
+      <th><span>Email</span></th>
+      <th><span>Credit Card</span></th>
+      <th><span>Job Position</span></th>
+      <th><span></span></th>
+    </tr>
+    <ng-container *ngFor="let user of usersData | sort:'asc'">
+        <tr class="details-main" *ngIf="user.jobposition === 'back'">
+          <td class="details">{{user.username}}</td>
+          <td class="details">{{user.email}}</td>
+          <td class="details-properties">{{user.creditCard | creditCardFormat}}</td>
+          <td class="details-properties">{{user.jobposition}}</td>
+          <td><button class="deleteUser" (click)="deleteUser(user.id)">Delete</button></td>
+        </tr>
+    </ng-container>
+  </table>
+
+  <h1>Full Stack</h1>
+  <table class="table-snapshot">
+    <tr>
+      <th><span>Username</span></th>
+      <th><span>Email</span></th>
+      <th><span>Credit Card</span></th>
+      <th><span>Job Position</span></th>
+      <th><span></span></th>
+    </tr>
+    <ng-container *ngFor="let user of usersData | sort:'asc'">
+        <tr class="details-main" *ngIf="user.jobposition === 'full'">
+          <td class="details">{{user.username}}</td>
+          <td class="details">{{user.email}}</td>
+          <td class="details-properties">{{user.creditCard | creditCardFormat}}</td>
+          <td class="details-properties">{{user.jobposition}}</td>
+          <td><button class="deleteUser" (click)="deleteUser(user.id)">Delete</button></td>
+        </tr>
+    </ng-container>
+  </table>
