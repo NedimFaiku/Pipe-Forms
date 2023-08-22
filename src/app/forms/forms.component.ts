@@ -32,62 +32,78 @@ export class FormsComponent implements OnInit {
         personalDetails: new FormGroup({
           firstname: new FormControl(null),
           lastname: new FormControl(null),
-          username: new FormControl(null, [Validators.required]),
-          email: new FormControl(null, [Validators.required, Validators.email]),
+          username: new FormControl(null, [
+            Validators.required,
+            this.usernameValidator,
+          ]),
+          email: new FormControl(null, [
+            Validators.required,
+            Validators.email,
+            this.emailValidator,
+          ]),
           password: new FormControl(null, [
             Validators.required,
             Validators.minLength(8),
           ]),
-          passwordConfirm: new FormControl(null, Validators.required),
+          passwordConfirm: new FormControl(null, [
+            Validators.required,
+            this.passwordConfirmValidator,
+          ]),
           creditCard: new FormControl(null, [
             Validators.required,
             Validators.maxLength(16),
             Validators.minLength(16),
+            this.creditCardValidator
           ]),
+          gender: new FormControl(null, Validators.required)
         }),
         jobPosition: new FormControl(null, Validators.required),
-      },
-      {
-        validators: [
-          this.usernameValidator,
-          this.emailValidator,
-          this.passwordConfirmValidator,
-        ],
       }
     );
   }
 
   usernameValidator = (control: AbstractControl): ValidationErrors | null => {
     let usernames = this.userData.map((e) => e.username);
-    if (usernames.includes(control.value.personalDetails.username)) {
+    if (usernames.includes(control.value)) {
       return {
         usernameNotAvailable: true,
         message: 'This user already exists!!!',
       };
     }
-    return null; // Validation passed
+    return null;
   };
 
   emailValidator = (control: AbstractControl): ValidationErrors | null => {
     let emails = this.userData.map((e) => e.email);
-    if (emails.includes(control.value.personalDetails.email)) {
+    if (emails.includes(control.value)) {
       return {
         emailNotAvailable: true,
         message: 'This email already exists!!!',
       };
     }
-    return null; // Validation passed
+    return null;
   };
 
   passwordConfirmValidator = (control: AbstractControl): ValidationErrors | null => {
-    let password = control.value.personalDetails.password;
-    if (password != control.value.personalDetails.passwordConfirm) {
+    let password = this.reactiveForm.value.personalDetails?.password;
+    if (password != control.value) {
       return {
         passwordNotMatching: true,
-        message: 'This password does not match!!!',
+        message: 'This password does not match!!!'
       };
     }
-    return null; // Validation passed
+    return null;
+  };
+
+  creditCardValidator = (control: AbstractControl): ValidationErrors | null => {
+    let regex = /^[0-9]+$/;
+    if (!regex.test(control.value)) {
+      return {
+        creditCardNotAllowed: true,
+        message: 'Your credit card number must contain only numbers!',
+      };
+    }
+    return null;
   };
 
   onSubmit() {

@@ -19,7 +19,7 @@ export class UsersDataService {
   }
 
   deleteUser(id: number){
-    const usersTemp = this.usersData.getValue().slice(id, 1);
+    const usersTemp = this.usersData.getValue().filter(user => user.id !== id);
     this.usersData.next([...usersTemp])
   }
 }

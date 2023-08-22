@@ -9,7 +9,8 @@ import { SortPipe } from './Pipes/sort.pipe';
 import { FormsComponent } from './forms/forms.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import { UserstableComponent } from './userstable/userstable.component';
-import { NavbarComponent } from './navbar/navbar.component'
+import { NavbarComponent } from './navbar/navbar.component';
+import { LoginComponent } from './login/login.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,6 +20,7 @@ import { NavbarComponent } from './navbar/navbar.component'
     FormsComponent,
     UserstableComponent,
     NavbarComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

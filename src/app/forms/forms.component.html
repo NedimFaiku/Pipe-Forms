@@ -4,21 +4,6 @@
     <h2 id="reistration">Registration Form</h2>
     <form action="" [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
       <div formGroupName="personalDetails">
-        <!-- <label for="fname">First Name</label>
-        <input
-          type="text"
-          id="fname"
-          placeholder="Your name.."
-          formControlName="firstname"
-        />
-
-        <label for="lname">Last Name</label>
-        <input
-          type="text"
-          id="lname"
-          placeholder="Your last name.."
-          formControlName="lastname"
-        /> -->
 
         <label for="username">Username</label>
         <input
@@ -26,21 +11,24 @@
           id="username"
           placeholder="Your username.."
           formControlName="username"
+          autocomplete="none"
         />
         <div>
-          <span
-            style="color: red"
-            *ngIf="reactiveForm.hasError('usernameNotAvailable')"
-          >
-            Username is not avaliable!
-          </span>
+          <span style="color: red">
             <span
-              style="color: red"
-              *ngIf="reactiveForm.get('personalDetails.username')?.invalid &&
-              reactiveForm.get('personalDetails.username')?.touched"
+              *ngIf="
+                reactiveForm
+                  .get('personalDetails.username')
+                  ?.hasError('required') &&
+                reactiveForm.get('personalDetails.username')?.touched
+              "
             >
               Username is required!
             </span>
+            <span *ngIf="reactiveForm.hasError('usernameNotAvailable')">
+              Username is not avaliable!
+            </span>
+          </span>
         </div>
 
         <label for="email">Email</label>
@@ -49,25 +37,43 @@
           id="email"
           placeholder="Your email.."
           formControlName="email"
+          autocomplete="none"
         />
         <div>
-          <span
+          <!-- <span
             style="color: red"
-            *ngIf="
-              reactiveForm.get('personalDetails.email')?.invalid &&
-              reactiveForm.get('personalDetails.email')?.touched
-            "
-            >The email you entered is not a valid email!</span
-          >
-          <span
-            style="color: red"
-            *ngIf="
-              reactiveForm.hasError('emailNotAvailable')
-            "
-            >The email you entered is not avaliable!</span
-          >
+            class="show"
+            *ngIf="reactiveForm.get('personalDetails.email')?.hasError('emailNotAvailable')"
+            >The email you entered is not avaliable!
+          </span> -->
+          <span style="color: red">
+            <span
+              *ngIf="
+                reactiveForm
+                  .get('personalDetails.email')
+                  ?.hasError('emailNotAvailable')
+              "
+              >The email you entered is not avaliable!</span
+            >
+            <span
+              *ngIf="
+                reactiveForm.get('personalDetails.email')?.hasError('email') &&
+                reactiveForm.get('personalDetails.email')?.dirty
+              "
+              >The email you entered is not a valid email!</span
+            >
+            <span
+              *ngIf="
+                reactiveForm
+                  .get('personalDetails.email')
+                  ?.hasError('required') && (
+                    reactiveForm.get('personalDetails.email')?.touched ||
+                reactiveForm.get('personalDetails.email')?.dirty)
+              "
+              >Email is required!</span
+            >
+          </span>
         </div>
-
 
         <label for="password">Password</label>
         <input
@@ -75,17 +81,21 @@
           id="password"
           placeholder="Your password.."
           formControlName="password"
+          autocomplete="none"
         />
         <div>
-          <span
-            style="color: red"
-            *ngIf="reactiveForm.get('personalDetails.password')?.invalid &&
-            reactiveForm.get('personalDetails.password')?.touched"
-          >
-            Your password is too short try using longer one!
+          <span style="color: red">
+            <span
+              style="color: red"
+              *ngIf="
+                reactiveForm.get('personalDetails.password')?.invalid &&
+                reactiveForm.get('personalDetails.password')?.touched
+              "
+            >
+              Your password is too short try using longer one!
+            </span>
           </span>
         </div>
-
 
         <label for="password">Confirm password</label>
         <input
@@ -93,16 +103,21 @@
           id="passwordConfirm"
           placeholder="Confirm your password.."
           formControlName="passwordConfirm"
+          autocomplete="none"
         />
         <div>
-          <span
-            style="color: red"
-            *ngIf="reactiveForm.get('personalDetails.passwordConfirm')?.touched && reactiveForm.hasError('passwordNotMatching')"
-          >
-            Your password does not match!
+          <span style="color: red;">
+            <span
+              style="color: red"
+              *ngIf="
+                reactiveForm.get('personalDetails.passwordConfirm')?.touched &&
+                (reactiveForm.get('personalDetails.passwordConfirm')?.hasError('passwordNotMatching') || reactiveForm.get('personalDetails.passwordConfirm')?.invalid)
+              "
+            >
+              Your password does not match!
+            </span>
           </span>
         </div>
-
 
         <label for="creditCard">Credit Card info</label>
         <input
@@ -110,18 +125,36 @@
           id="creditCard"
           placeholder="Your credit Card info.."
           formControlName="creditCard"
+          autocomplete="none"
         />
         <div>
-          <span
-            style="color: red"
-            *ngIf="reactiveForm.get('personalDetails.creditCard')?.invalid &&
-            reactiveForm.get('personalDetails.creditCard')?.touched"
-          >
-            Your credit card number must have 16 characters!
+          <span style="color: red;">
+            <span
+              style="color: red"
+              *ngIf="
+                (reactiveForm.get('personalDetails.creditCard')?.hasError('maxlength') ||  reactiveForm.get('personalDetails.creditCard')?.hasError('minlength'))&&
+                reactiveForm.get('personalDetails.creditCard')?.touched && !reactiveForm.get('personalDetails.creditCard')?.hasError('creditCardNotAllowed')
+              "
+            >
+              Your credit card number must have 16 characters!
+            </span>
+            <span
+              style="color: red"
+              *ngIf="
+              (!reactiveForm.get('personalDetails.creditCard')?.hasError('maxlength') ||  !reactiveForm.get('personalDetails.creditCard')?.hasError('minlength')) &&
+              !reactiveForm.get('personalDetails.creditCard')?.hasError('required') &&
+                reactiveForm.get('personalDetails.creditCard')?.touched &&
+                reactiveForm.get('personalDetails.creditCard')?.hasError('creditCardNotAllowed')
+              "
+            >
+              Your credit card number must contain just numbers!
+            </span>
+            <span *ngIf="reactiveForm.get('personalDetails.creditCard')?.hasError('required') && reactiveForm.get('personalDetails.creditCard')?.touched">
+              Credit Card information is required!
+            </span>
           </span>
         </div>
       </div>
-
 
       <label for="job">Job Position:</label>
       <input
