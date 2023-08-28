@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UsersDataService } from '../Services/users-data.service';
 import { Register } from '../Interfaces/register';
 
@@ -7,15 +7,22 @@ import { Register } from '../Interfaces/register';
   templateUrl: './userstable.component.html',
   styleUrls: ['./userstable.component.css'],
 })
-export class UserstableComponent {
+export class UserstableComponent implements OnInit{
   usersData: Register[] = [];
+
   constructor(private userDataService: UsersDataService) {
     this.userDataService.users.subscribe((users) => {
       this.usersData = users;
     });
   }
 
+  ngOnInit(): void {
+
+  }
+    
+
   deleteUser(id: number) {
     this.userDataService.deleteUser(id);
   }
 }
+

@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, mapToCanActivate } from '@angular/router';
 import { FormsComponent } from './forms/forms.component';
 import { UserstableComponent } from './userstable/userstable.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './auth/auth.guard';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
 
 const routes: Routes = [
   {
@@ -11,7 +14,13 @@ const routes: Routes = [
     path: 'signup', component: FormsComponent
   },
   {
-    path: 'users', component: UserstableComponent
+    path: 'login', component: LoginComponent
+  },
+  {
+    path: 'users', component: UserstableComponent, canActivate: mapToCanActivate([AuthGuard])
+  },
+  {
+    path: 'profile/:userId', component: ProfilePageComponent
   },
 ];
 

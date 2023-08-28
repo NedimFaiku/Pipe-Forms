@@ -5,6 +5,7 @@ export interface Register {
     username: string,
     email: string,
     password: string,
-    jobposition: string,
+    role: string,
+    jobposition?: string,
     creditCard: string
 }

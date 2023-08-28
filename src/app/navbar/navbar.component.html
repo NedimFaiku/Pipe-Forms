@@ -1,4 +1,8 @@
 <div class="nav">
     <h2 routerLink="/users">Users</h2>
     <h2 routerLink="/signup">Sign Up</h2>
+    <h2 *ngIf="!currentUser" routerLink="/login">Login</h2>
+    <h2 *ngIf="currentUser" (click)="logout()">Logout</h2>
+    <h2 routerLink="/profile">Profile</h2>
+    <h2 *ngIf="currentUser">Welcome {{ currentUser.username }}</h2>
 </div>

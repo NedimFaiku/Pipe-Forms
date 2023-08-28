@@ -1,0 +1,227 @@
+<form action="" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div formGroupName="personalDetails">
+      <label for="username">Username</label>
+      <input
+        type="text"
+        id="username"
+        placeholder="Your username.."
+        formControlName="username"
+        autocomplete="none"
+      />
+      <div>
+        <span class="error">
+          <span
+            *ngIf="
+              userForm
+                .get('personalDetails.username')
+                ?.hasError('required') &&
+              userForm.get('personalDetails.username')?.touched
+            "
+          >
+            Username is required!
+          </span>
+          <span *ngIf="userForm.hasError('usernameNotAvailable')">
+            Username is not avaliable!
+          </span>
+        </span>
+      </div>
+
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        placeholder="Your email.."
+        formControlName="email"
+        autocomplete="none"
+      />
+      <div>
+        <span class="error">
+          <span
+            *ngIf="
+              userForm
+                .get('personalDetails.email')
+                ?.hasError('emailNotAvailable')
+            "
+            >The email you entered is not avaliable!</span
+          >
+          <span
+            *ngIf="
+              userForm.get('personalDetails.email')?.hasError('email') &&
+              userForm.get('personalDetails.email')?.dirty
+            "
+            >The email you entered is not a valid email!</span
+          >
+          <span
+            *ngIf="
+              userForm
+                .get('personalDetails.email')
+                ?.hasError('required') &&
+              (userForm.get('personalDetails.email')?.touched ||
+                userForm.get('personalDetails.email')?.dirty)
+            "
+            >Email is required!</span
+          >
+        </span>
+      </div>
+
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        placeholder="Your password.."
+        formControlName="password"
+        autocomplete="none"
+      />
+      <div>
+        <span class="error">
+          <span
+            style="color: red"
+            *ngIf="
+              userForm.get('personalDetails.password')?.invalid &&
+              userForm.get('personalDetails.password')?.touched
+            "
+          >
+            Your password is too short try using longer one!
+          </span>
+        </span>
+      </div>
+
+      <label for="password">Confirm password</label>
+      <input
+        type="password"
+        id="passwordConfirm"
+        placeholder="Confirm your password.."
+        formControlName="passwordConfirm"
+        autocomplete="none"
+      />
+      <div>
+        <span class="error">
+          <span
+            style="color: red"
+            *ngIf="
+              userForm.get('personalDetails.passwordConfirm')?.touched &&
+              (userForm
+                .get('personalDetails.passwordConfirm')
+                ?.hasError('passwordNotMatching') ||
+                userForm.get('personalDetails.passwordConfirm')?.invalid)
+            "
+          >
+            Your password does not match!
+          </span>
+        </span>
+      </div>
+
+      <label for="creditCard">Credit Card info</label>
+      <input
+        type="text"
+        id="creditCard"
+        placeholder="Your credit Card info.."
+        formControlName="creditCard"
+        autocomplete="none"
+      />
+      <div>
+        <span class="error">
+          <span
+            style="color: red"
+            *ngIf="
+              (userForm
+                .get('personalDetails.creditCard')
+                ?.hasError('maxlength') ||
+                userForm
+                  .get('personalDetails.creditCard')
+                  ?.hasError('minlength')) &&
+              userForm.get('personalDetails.creditCard')?.touched &&
+              !userForm
+                .get('personalDetails.creditCard')
+                ?.hasError('creditCardNotAllowed')
+            "
+          >
+            Your credit card number must have 16 characters!
+          </span>
+          <span
+            style="color: red"
+            *ngIf="
+              (!userForm
+                .get('personalDetails.creditCard')
+                ?.hasError('maxlength') ||
+                !userForm
+                  .get('personalDetails.creditCard')
+                  ?.hasError('minlength')) &&
+              !userForm
+                .get('personalDetails.creditCard')
+                ?.hasError('required') &&
+              userForm.get('personalDetails.creditCard')?.touched &&
+              userForm
+                .get('personalDetails.creditCard')
+                ?.hasError('creditCardNotAllowed')
+            "
+          >
+            Your credit card number must contain just numbers!
+          </span>
+          <span
+            *ngIf="
+              userForm
+                .get('personalDetails.creditCard')
+                ?.hasError('required') &&
+              userForm.get('personalDetails.creditCard')?.touched
+            "
+          >
+            Credit Card information is required!
+          </span>
+        </span>
+      </div>
+      <div class="centerRadio">
+        <label for="gender">Gender:</label>
+        <input type="radio" id="male" value="male" formControlName="gender" />
+        <label for="male">Male</label>
+        <input
+          type="radio"
+          id="female"
+          value="female"
+          formControlName="gender"
+        />
+        <label for="female">Female</label>
+      </div>
+    </div>
+    <br />
+    <div class="centerRadio">
+      <label for="fole">Role:</label>
+      <input type="radio" id="user" value="user" formControlName="role" (change)="setRole($event)"/>
+      <label for="user">User</label>
+      <input type="radio" id="admin" value="admin" formControlName="role" (change)="setRole($event)"/>
+      <label for="admin">Admin</label>
+    </div>
+    <br />
+    <div *ngIf="role === 'user'">
+      <label for="job">Job Position:</label>
+      <input
+        type="radio"
+        id="full"
+        value="full"
+        formControlName="jobPosition"
+      />
+      <label for="full">Full Stack</label>
+      <input
+        type="radio"
+        id="front"
+        value="front"
+        formControlName="jobPosition"
+      />
+      <label for="front">Front End</label>
+      <input
+        type="radio"
+        id="back"
+        value="back"
+        formControlName="jobPosition"
+      />
+      <label for="back">Back end</label>
+    </div>
+    <br />
+
+    <input
+      type="submit"
+      value="Submit"
+      id="btn"
+      [disabled]="userForm.invalid"
+    />
+  </form>

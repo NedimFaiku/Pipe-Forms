@@ -10,7 +10,8 @@ import { FormsComponent } from './forms/forms.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import { UserstableComponent } from './userstable/userstable.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { LoginComponent } from './login/login.component'
+import { LoginComponent } from './login/login.component';
+import { ProfilePageComponent } from './profile-page/profile-page.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,6 +22,7 @@ import { LoginComponent } from './login/login.component'
     UserstableComponent,
     NavbarComponent,
     LoginComponent,
+    ProfilePageComponent,
   ],
   imports: [
     BrowserModule,

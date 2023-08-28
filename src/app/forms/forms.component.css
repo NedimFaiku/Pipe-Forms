@@ -47,13 +47,25 @@ input.ng-invalid.ng-touched{
     align-items: center;
 }
 
-span{
-    color: red;
-    height: 25px;
-    display: block;
+
+.login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
 }
 
-.show{
-    opacity: 1;
+.login a{
+    cursor: pointer;
+    color: rgb(0, 132, 255);
 }
 
+.login a:hover{
+    color: rgb(0, 102, 255);
+}
+
+.centerRadio{
+    display: flex; 
+    justify-content: center;
+}

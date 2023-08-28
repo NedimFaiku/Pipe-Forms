@@ -1,1 +1,45 @@
-<p>login works!</p>
+<div class="container">
+  <div class="login">
+    <h1>Login</h1>
+    <form action="" [formGroup]="LoginForm" (ngSubmit)="onSubmit()">
+      <input
+        type="text"
+        name="username"
+        id="username"
+        placeholder="Username"
+        formControlName="username"
+      />
+      <span class="error">
+        <span
+          *ngIf="
+            this.LoginForm.get('username')?.touched &&
+            this.LoginForm.get('username')?.hasError('required')
+          "
+          >Username is required</span
+        >
+      </span>
+      <input
+        type="password"
+        name="password"
+        id="password"
+        placeholder="Password"
+        formControlName="password"
+      />
+      <span class="error">
+        <span
+          *ngIf="
+            this.LoginForm.get('password')?.touched &&
+            this.LoginForm.get('password')?.hasError('required')
+          "
+          >Password is required</span
+        >
+      </span>
+      <input type="submit" value="Login" />
+      <span class="error" style="margin-top: 20px;" *ngIf="loginDataValid === null">Your account does not exist!</span>
+    </form>
+    <div class="createAcc">
+      <span>Not a member?</span>
+        <a routerLink="/signup">Create Account</a>
+    </div>
+  </div>
+</div>

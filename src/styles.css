@@ -7,3 +7,9 @@ body{
     margin: 0;
     padding: 0;
 }
+
+span.error{
+    color: red;
+    height: 25px;
+    display: block;
+}

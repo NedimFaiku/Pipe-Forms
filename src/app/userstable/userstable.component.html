@@ -8,7 +8,7 @@
       <th><span></span></th>
     </tr>
     <ng-container *ngFor="let user of usersData | sort:'asc'">
-        <tr class="details-main" *ngIf="user.jobposition === 'front'">
+        <tr class="details-main" *ngIf="user.jobposition === 'front'" [routerLink]="['/profile', user.id]">
           <td class="details">{{user.username}}</td>
           <td class="details">{{user.email}}</td>
           <td class="details-properties">{{user.creditCard | creditCardFormat}}</td>
